@@ -1,1 +1,1 @@
-# IoT_Laundry_System
+# IoT기반 공동세탁기 관리 솔루션
