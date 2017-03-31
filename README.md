@@ -45,6 +45,7 @@
     + Mobile : Android OS Phone
     
   + Software
+  
     + 전원 on/off 확인 기능
     + 세탁 남은 시간 확인 기능
     + 예약기능
