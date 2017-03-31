@@ -37,7 +37,7 @@
     + Github 오픈소스 조사
     + 관련도서 및 관련 문서 참조
     + 인터넷(블로그 및 카페)을 통한 질문 등록
-    + PM 및 해당 자문자 질의
+    + PM 및 해당 자문자 질의
 
 + 시스템 구성 내용
   + Hardware
@@ -45,7 +45,7 @@
     + Mobile : Android OS Phone
     
   + Software
-    + 전원 on/off 확인 기능
+    + 전원 on/off 확인 기능
     + 세탁 남은 시간 확인 기능
     + 예약기능
     + push
