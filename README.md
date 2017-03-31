@@ -41,7 +41,7 @@
 
 + 시스템 구성 내용
   + Hardware
-    + Arduion : 전류센서, 릴리즈
+    + Arduion : 전류센서, 릴리즈
     + Mobile : Android OS Phone
     
   + Software
