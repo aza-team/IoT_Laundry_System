@@ -53,7 +53,7 @@
     
   + 개발
     + 개발도구 : eclipse, ArduinoIDE
-    + 개발언어 : JAVA, Android, JSP, C
+    + 개발언어 : JAVA, Android, JSP, C++
     + 데이터베이스 : MySQL
     
 ---
