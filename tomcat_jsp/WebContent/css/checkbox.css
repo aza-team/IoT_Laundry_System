@@ -1,0 +1,199 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+body {
+  background: #ccc; }
+
+.container {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center; }
+  .container h1 {
+    font-size: 20px;
+    color: #111;
+    font-weight: 300;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2); }
+  .container section {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    text-align: center;
+    width: 120px;
+    height: 100px;
+    margin: 0 15px; }
+    .container section:after {
+      content: attr(title);
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: -5px;
+      font-size: 14px;
+      color: #111;
+      text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2); }
+
+.simpleButon {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 50px;
+  background-image: -webkit-linear-gradient(left, #FCFFF4 0%, #B3BEAD 70%);
+  background-image: -o-linear-gradient(left, #FCFFF4 0%, #B3BEAD 70%);
+  background-image: linear-gradient(to right, #FCFFF4 0%, #B3BEAD 70%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFCFFF4', endColorstr='#FFB3BEAD', GradientType=1);
+  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(255, 255, 255, 0.3); }
+  .simpleButon label {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    background: #FCFFF4;
+    background-image: -webkit-linear-gradient(left, #aaa 100%, #FCFFF4 0%);
+    background-image: -o-linear-gradient(left, #aaa 100%, #FCFFF4 0%);
+    background-image: linear-gradient(to right, #aaa 100%, #FCFFF4 0%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFAAAAAA', endColorstr='#FFFCFFF4', GradientType=1);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(255, 255, 255, 0.2); }
+  .simpleButon input[type="checkbox"] {
+    visibility: hidden; }
+    .simpleButon input[type="checkbox"]:checked + label {
+      background-image: -webkit-linear-gradient(left, #27AE60 0%, #60db94 100%);
+      background-image: -o-linear-gradient(left, #27AE60 0%, #60db94 100%);
+      background-image: linear-gradient(to right, #27AE60 0%, #60db94 100%);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF27AE60', endColorstr='#FF60DB94', GradientType=1); }
+
+.roundedOne {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: linear-gradient(to top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px #fff, 0px 1px 3px rgba(0, 0, 0, 0.5); }
+  .roundedOne label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: linear-gradient(to top, #222 0%, #45484d 100%);
+    border-radius: 50px; }
+    .roundedOne label:after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      cursor: pointer;
+      top: 2px;
+      left: 2px;
+      background: #27AE60;
+      background: linear-gradient(to top, #27AE60 0%, #145b32 100%);
+      opacity: 0;
+      border-radius: 50px;
+      box-shadow: inset 0px 1px 1px #fff, 0px 1px 3px rgba(0, 0, 0, 0.5); }
+    .roundedOne label:hover::after {
+      opacity: 0.3; }
+  .roundedOne input[type=checkbox] {
+    visibility: hidden; }
+    .roundedOne input[type=checkbox]:checked + label:after {
+      opacity: 1; }
+
+.slideTwo {
+  width: 80px;
+  height: 30px;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2); }
+  .slideTwo:after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    height: 2px;
+    width: 52px;
+    background: #111;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2); }
+  .slideTwo label {
+    display: block;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+    background: #fcfff4;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #FCFFF4 0%, #DFE5D7 40%, #B3BEAD 100%); }
+    .slideTwo label:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: #333;
+      border-radius: 50px;
+      box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2); }
+  .slideTwo input[type=checkbox] {
+    visibility: hidden; }
+    .slideTwo input[type=checkbox]:checked + label {
+      left: 54px; }
+      .slideTwo input[type=checkbox]:checked + label:after {
+        background: #27AE60; }
+
+.slideThree {
+  width: 80px;
+  height: 26px;
+  background: #333;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2); }
+  .slideThree:after {
+    content: 'OFF';
+    color: #000;
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15); }
+  .slideThree:before {
+    content: 'ON';
+    color: #27AE60;
+    position: absolute;
+    left: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba(39, 174, 96, 0.7); }
+  .slideThree label {
+    display: block;
+    width: 34px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: #fcfff4;
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3); }
+  .slideThree input[type=checkbox] {
+    visibility: hidden; }
+    .slideThree input[type=checkbox]:checked + label {
+      left: 43px; }
+
+/*# sourceMappingURL=sass.css.map */
