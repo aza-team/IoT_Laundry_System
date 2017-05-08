@@ -23,16 +23,16 @@
 		
 		stmt =conn.prepareStatement(sql);
 	if(id.equals("")){
-		out.print("1");//Áßº¹Ã¼Å©
+		out.print("1");//ì¤‘ë³µì²´í¬
 	}
 	else if(pwd.equals("")){
-		out.print("2");//ºñ¹Ğ¹øÈ£
+		out.print("2");//ë¹„ë°€ë²ˆí˜¸
 	}
 	else if(phone.equals("")){
-		out.print("3");//Æù
+		out.print("3");//í°
 	}
 	else if(email.equals("")){
-		out.print("4");//ÀÌ¸ŞÀÏ
+		out.print("4");//ì´ë©”ì¼
 	}
 	else {
 			stmt.setString(1,id);
@@ -40,14 +40,14 @@
 			stmt.setString(3,phone);
 			stmt.setString(4,email);
 			result = stmt.executeUpdate();
-			out.print("È¸¿ø°¡ÀÔ¼º°øÇÏ¿´½À´Ï´Ù.");//È¸¿ø°¡ÀÔ¼º°ø½Ã1
+			out.print("íšŒì›ê°€ì…ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.");//íšŒì›ê°€ì…ì„±ê³µì‹œ1
 	}
 		
 		
 		conn.close();
 		
 	}catch(Exception e){
-		out.print("È¸¿ø°¡ÀÔ½ÇÆĞÇÏ¿´½À´Ï´Ù.");//È¸¿ø°¡ÀÔ½ÇÆĞ½Ã2
+		out.print("íšŒì›ê°€ì…ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");//íšŒì›ê°€ì…ì‹¤íŒ¨ì‹œ2
 		connect=false;
 		e.printStackTrace();
 	}
