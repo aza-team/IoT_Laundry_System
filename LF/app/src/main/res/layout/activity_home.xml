@@ -45,10 +45,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteY="600dp"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimaryDark"
+        tools:layout_editor_absoluteY="45dp"
+        tools:layout_editor_absoluteX="dp">
 
     </LinearLayout>
 

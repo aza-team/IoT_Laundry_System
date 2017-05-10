@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                menu_bar.setVisibility(View.GONE);
                 notice.setVisibility(View.GONE);
                 under_bar.setVisibility(View.GONE);
                 bt_home.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         bt_reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                menu_bar.setVisibility(View.GONE);
                 notice.setVisibility(View.GONE);
+                under_bar.setVisibility(View.GONE);
                 bt_home.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 bt_reserve.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 bt_mine.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -66,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
         bt_mine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                menu_bar.setVisibility(View.GONE);
                 notice.setVisibility(View.GONE);
+                under_bar.setVisibility(View.GONE);
                 bt_home.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 bt_reserve.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 bt_mine.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -7,13 +7,15 @@
     tools:context="com.aza.lf.MemberActivity">
 
     <LinearLayout
-        android:layout_width="384dp"
-        android:layout_height="567dp"
-        android:orientation="vertical">
+        android:layout_width="368dp"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:background="@color/colorPrimary"
             android:orientation="vertical">
 
@@ -111,7 +113,6 @@
                 android:layout_marginTop="15dp" />
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +142,6 @@
                     android:layout_gravity="right"
                     android:id="@+id/bt_mem_no"/>
             </LinearLayout>
-
 
         </LinearLayout>
     </LinearLayout>
