@@ -177,7 +177,7 @@ class memberCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
-            URL url = new URL("http://172.30.1.37:8080/cat/test.jsp?" + sendMsg);
+            URL url = new URL("http://192.168.0.201:8080/cat/test.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
@@ -217,7 +217,7 @@ class idCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0];
-            URL url = new URL("http://172.30.1.37:8080/cat/idcheck.jsp?" + sendMsg);
+            URL url = new URL("http://192.168.0.201:8080/cat/idcheck.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
