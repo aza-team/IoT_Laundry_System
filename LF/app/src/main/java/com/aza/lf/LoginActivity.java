@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         //회원가입버튼클릭시;
         //로그인버튼클릭시
         bt_login.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
+            @Override
+            public void onClick(View view){
                 String result="";
                 try{
                     loginCheck task1 = new loginCheck();
@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                     dialog = builder.setMessage("로그인성공하였습니다.!").setPositiveButton("확인",null).create();
                     dialog.show();
                     return;
-
                 }
                 else if(result.equals("2")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -76,9 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //로그인버튼클릭시;
-
     }
-
 }
 class loginCheck extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
@@ -90,7 +87,7 @@ class loginCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1];
-            URL url = new URL("http://172.19.2.76:8080/cat/login.jsp?" + sendMsg);
+            URL url = new URL("http://172.20.5.73:8080/cat/login.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");

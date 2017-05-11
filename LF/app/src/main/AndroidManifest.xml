@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MemberActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".HomeActivity"></activity>
     </application>
 
