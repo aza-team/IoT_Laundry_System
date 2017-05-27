@@ -41,10 +41,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //회원가입버튼클릭시;
-        //로그인버튼클릭시
         bt_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                Intent NextIntent = new Intent(LoginActivity.this, MineActivity.class);
+                LoginActivity.this.startActivity(NextIntent);
+            }
+        });
+        /*
+        //로그인버튼클릭시
+        bt_login.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
                 String result="";
                 try{
                     loginCheck task1 = new loginCheck();
@@ -55,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if(result.equals("1")){
                     //로그인 성공시 넘어가는 페이지
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    dialog = builder.setMessage("로그인성공하였습니다.!").setPositiveButton("확인",null).create();
-                    dialog.show();
+                    Intent NextIntent = new Intent(LoginActivity.this, MineActivity.class);
+                    LoginActivity.this.startActivity(NextIntent);
                     return;
+
                 }
                 else if(result.equals("2")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -75,7 +83,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //로그인버튼클릭시;
+        */
+
     }
+
 }
 class loginCheck extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
@@ -87,7 +98,7 @@ class loginCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1];
-            URL url = new URL("http://172.20.5.73:8080/cat/login.jsp?" + sendMsg);
+            URL url = new URL("http://192.168.0.3:8080/cat/login.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");

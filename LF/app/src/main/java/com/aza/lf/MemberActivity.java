@@ -92,7 +92,7 @@ public class MemberActivity extends AppCompatActivity {
                 }
             }
         });
-        //중복버튼;
+        //중복버튼
         //확인버튼
         Button bt_mem_ok = (Button)findViewById(R.id.bt_mem_ok);
         bt_mem_ok.setOnClickListener(new View.OnClickListener(){
@@ -168,6 +168,7 @@ public class MemberActivity extends AppCompatActivity {
 }
 
 class memberCheck extends AsyncTask<String, Void, String> {
+
     String sendMsg, receiveMsg;
 
 
@@ -177,7 +178,7 @@ class memberCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
-            URL url = new URL("http://172.20.5.73:8080/cat/test.jsp?" + sendMsg);
+            URL url = new URL("http://192.168.0.3:8080/cat/test.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
@@ -217,7 +218,7 @@ class idCheck extends AsyncTask<String, Void, String> {
         try{
             String str;
             sendMsg = "id=" + strings[0];
-            URL url = new URL("http://172.20.5.73:8080/cat/idcheck.jsp?" + sendMsg);
+            URL url = new URL("http://192.168.0.3:8080/cat/idcheck.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
