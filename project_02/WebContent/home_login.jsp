@@ -21,7 +21,7 @@
 					<li class="active"><a href="#" onclick="sign_in()">로그인</a>
 						<span class="linea_bajo_nom"></span>
 					</li>
-					<li><a href="#up" onclick="sign_up()">회원 가입</a><span class="linea_bajo_nom"></span>
+					<li><a href="#up" onclick="sign_up()">회원 가입 </a><span class="linea_bajo_nom"></span>
 					</li>
 				</ul>
 			</div>
