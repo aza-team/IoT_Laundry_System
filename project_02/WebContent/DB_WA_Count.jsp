@@ -21,7 +21,7 @@
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, id, pw);
-			
+			 
 			String sql = "UPDATE test set WACount=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, result);
