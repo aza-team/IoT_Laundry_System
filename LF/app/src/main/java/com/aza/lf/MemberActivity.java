@@ -17,9 +17,11 @@ import com.android.volley.toolbox.Volley;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 
 public class MemberActivity extends AppCompatActivity {
@@ -50,7 +52,6 @@ public class MemberActivity extends AppCompatActivity {
             public void onClick(View view){
                 Intent LoginIntent = new Intent(MemberActivity.this,LoginActivity.class);
                 MemberActivity.this.startActivity(LoginIntent);
-                Log.i("a","good");
             }
         });
         //취소버튼클릭;
@@ -62,8 +63,8 @@ public class MemberActivity extends AppCompatActivity {
                 try{
                     idCheck task1 = new idCheck();
                     result = task1.execute(et_id.getText().toString()).get();
+
                 }catch (Exception e){
-                    Log.i("통신결과 에러","a");
                     e.printStackTrace();
                 }
 
@@ -77,14 +78,20 @@ public class MemberActivity extends AppCompatActivity {
                     return;
                 }
                 else if(result.equals("0")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
-                    dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인",null).create();
-                    dialog.show();
-                    validate = false;
-                    return;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
+                        dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인",null).create();
+                        dialog.show();
+                        validate = false;
+                        return;
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
+                    Log.i("통신결과 에러","a");
+                    Log.i("check123",result);
+                    Log.v("check123",result);
+                    Log.e("check123",result);
+                    Log.d("check123",result);
+                    Log.i("check123",result);
                     dialog = builder.setMessage("이미 사용중인 아이디입니다.").setPositiveButton("확인",null).create();
                     dialog.show();
                     validate = false;
@@ -92,7 +99,7 @@ public class MemberActivity extends AppCompatActivity {
                 }
             }
         });
-        //중복버튼
+        //중복버튼;
         //확인버튼
         Button bt_mem_ok = (Button)findViewById(R.id.bt_mem_ok);
         bt_mem_ok.setOnClickListener(new View.OnClickListener(){
@@ -175,10 +182,75 @@ class memberCheck extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String[] strings) {
+        /*
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
-            URL url = new URL("http://192.168.0.3:8080/cat/test.jsp?" + sendMsg);
+            URL url = new URL("http://172.20.5.188:8080/cat/test.jsp?" + sendMsg);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
+            conn.setRequestMethod("GET");
+            if(conn.getResponseCode()==conn.HTTP_OK){
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(),"EUC-KR");
+                BufferedReader reader = new BufferedReader(tmp);
+                StringBuffer buffer = new StringBuffer();
+                while((str = reader.readLine()) !=null){
+                    buffer.append(str);
+                }
+                receiveMsg=buffer.toString();
+
+            }else{
+                Log.i("통신결과", conn.getResponseCode()+"에러");
+            }
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return receiveMsg;
+        */
+        try{
+            sendMsg = "id="+strings[0] + "&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
+            URL url = new URL("http://58.237.71.218:8080/cat/test.jsp?");
+            HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+            urlconnection.setDoInput(true);
+            urlconnection.setDoOutput(true);
+            urlconnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            urlconnection.setRequestMethod("POST");
+            OutputStream opstrm = urlconnection.getOutputStream();
+            opstrm.write(sendMsg.getBytes());
+            opstrm.flush();
+            opstrm.close();
+            String buffer = null;
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+            while((buffer = in.readLine()) != null){
+                receiveMsg = buffer;
+            }
+            in.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return receiveMsg;
+    }
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+    }
+}
+
+class idCheck extends AsyncTask<String, Void, String> {
+    String sendMsg, receiveMsg;
+
+
+
+    @Override
+    protected String doInBackground(String[] strings) {
+        /*
+        try{
+            String str;
+            sendMsg = "id=" + strings[0];
+            URL url = new URL("http://172.20.4.36:8080/cat/idcheck.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
@@ -199,45 +271,30 @@ class memberCheck extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
         return receiveMsg;
-    }
+        */
 
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-
-    }
-}
-
-class idCheck extends AsyncTask<String, Void, String> {
-    String sendMsg, receiveMsg;
-
-
-
-    @Override
-    protected String doInBackground(String[] strings) {
         try{
-            String str;
-            sendMsg = "id=" + strings[0];
-            URL url = new URL("http://192.168.0.3:8080/cat/idcheck.jsp?" + sendMsg);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
-            conn.setRequestMethod("GET");
-            if(conn.getResponseCode()==conn.HTTP_OK){
-                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(),"EUC-KR");
-                BufferedReader reader = new BufferedReader(tmp);
-                StringBuffer buffer = new StringBuffer();
-                while((str = reader.readLine()) !=null){
-                    buffer.append(str);
-                }
-                receiveMsg=buffer.toString();
-            }else{
-                Log.i("통신결과", conn.getResponseCode()+"에러");
+            sendMsg = "id="+strings[0];
+            URL url = new URL("http://58.237.71.218:8080/cat/idcheck.jsp?");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            urlConnection.setRequestMethod("POST");
+            OutputStream opstrm = urlConnection.getOutputStream();
+            opstrm.write(sendMsg.getBytes());
+            opstrm.flush();
+            opstrm.close();
+            String buffer = null;
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            while((buffer = in.readLine()) != null){
+                receiveMsg = buffer;
             }
-        }catch(MalformedURLException e){
-            e.printStackTrace();
-        }catch(IOException e){
+            in.close();
+        }catch (IOException e){
             e.printStackTrace();
         }
+
         return receiveMsg;
     }
 

@@ -27,7 +27,7 @@ import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 
 public class MineActivity extends AppCompatActivity {
-
+    ImageView bt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class MineActivity extends AppCompatActivity {
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 Log.i("cat2","여기부터실패");
                 String Currentmac;
-                String yjp_guest = "ec:8c:a2:1f:d6:ec";
+                String yjp_guest = "d8:38:fc:22:90:ac";
                 int m_iNetworkType = activeNetwork.getType();
                 //BSSID로 구분
                 if(m_iNetworkType == cm.TYPE_WIFI){
@@ -103,7 +103,6 @@ public class MineActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                             bt.setBackgroundResource(R.drawable.ing);
-
                                     }
                                 });
                                 try{
@@ -141,6 +140,25 @@ public class MineActivity extends AppCompatActivity {
 
                         //네트워크 인증 실패했을때 발생하는 이벤트
 
+                }
+            }
+        });
+    }
+
+
+    private void time(){
+        new Thread(new Runnable(){
+            public void run(){
+                try{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.currentTimeMillis();
+
+                        }
+                    });
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             }
         });
