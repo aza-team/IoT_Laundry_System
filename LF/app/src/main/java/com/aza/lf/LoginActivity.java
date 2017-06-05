@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     private String UserPassword;
     private String userPassword;
     private AlertDialog dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //회원가입버튼클릭시;
+        /*
         bt_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -49,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.startActivity(NextIntent);
             }
         });
-        /*
+        */
+
         //로그인버튼클릭시
         bt_login.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -84,10 +88,38 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //로그인버튼클릭시;
-        */
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
 class loginCheck extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;

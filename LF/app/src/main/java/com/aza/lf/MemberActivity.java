@@ -35,6 +35,36 @@ public class MemberActivity extends AppCompatActivity {
     private String 중복체크="";
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
@@ -50,8 +80,7 @@ public class MemberActivity extends AppCompatActivity {
         bt_mem_no.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent LoginIntent = new Intent(MemberActivity.this,LoginActivity.class);
-                MemberActivity.this.startActivity(LoginIntent);
+                finish();
             }
         });
         //취소버튼클릭;

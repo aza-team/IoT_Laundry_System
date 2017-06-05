@@ -8,6 +8,7 @@ import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -22,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
@@ -69,15 +76,21 @@ public class MineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
+                String certification = "";
+                DAO dao = new DAO();
+                certification = dao.getCertification("1");
+                Log.i("인증",certification);
                 //네트워크로 통한 사용자 인증
-
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
                 Log.i("cat","이까지성공");
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 Log.i("cat2","여기부터실패");
                 String Currentmac;
-                String yjp_guest = "d8:38:fc:22:90:ac";
+                String yjp_guest = "ec:8c:a2:1f:d6:ec";
+                String yjp_guset2 = "d8:38:fc:22:90:a8";
+                String yjp_guest3 = "d8:38:fc:22:90:ac";
+                String myHome = "64:e5:99:37:86:c2";
                 int m_iNetworkType = activeNetwork.getType();
                 //BSSID로 구분
                 if(m_iNetworkType == cm.TYPE_WIFI){
@@ -85,10 +98,12 @@ public class MineActivity extends AppCompatActivity {
                     Log.i("현재BSSID",Currentmac);
                     Log.i("내부BSSID",yjp_guest);
 
-                    if(Currentmac.trim().equals(yjp_guest)) {
+                    if(Currentmac.trim().equals(yjp_guest) || Currentmac.trim().equals(yjp_guset2)
+                            || Currentmac.trim().equals(yjp_guest3) || Currentmac.trim().equals(myHome)) {
 
                         //네트워크 인증되었을때 발생하는 이벤트
 
+                        new DAO().certificationDAO("1","1");//첫번째 내 세탁기번호, 두번째 0: 인증x 1:인증확인
                         Toast.makeText(MineActivity.this, "certification suecces", Toast.LENGTH_SHORT).show();
 
                         new Thread(new Runnable() {

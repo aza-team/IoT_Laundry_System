@@ -3,15 +3,14 @@
 
 <%
 	Connection conn=null;
-	String id = request.getParameter("id");
-	String pwd = request.getParameter("pwd");
+	String no = request.getParameter("no");
 	//MySQL DBMS
 	String driver="com.mysql.jdbc.Driver";
 	String url="jdbc:mysql://localhost:3306/cat";
 	
 	PreparedStatement stmt = null;
 	
-	String sql = "select * from member where id = ?";
+	String sql = "select * from laundry where no = ?";
 	Boolean connect=false;
 	ResultSet result = null;
 	
@@ -20,22 +19,10 @@
 		conn=DriverManager.getConnection(url,"root","root");
 		
 		stmt =conn.prepareStatement(sql);
-		stmt.setString(1,id);
+		stmt.setString(1,no);
 		result = stmt.executeQuery();
 		if(result.next()){
-			if(pwd.equals(result.getString("password"))){
-				out.print("1");
-				//로그인성공			
-				}
-			else{
-				out.print("2");
-				//아이디 성공 패스워드 실패
-			}
-		}
-		else{
-			out.print("0");
-			//아이디 없음
-			out.print(result.getString("password"));
+			out.print(result.getString("certification"));
 		}
 		
 		conn.close();
@@ -43,4 +30,4 @@
 		connect=false;
 		e.printStackTrace();
 	}
-%>
+%>	
