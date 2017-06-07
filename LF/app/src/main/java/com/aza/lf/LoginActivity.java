@@ -1,6 +1,7 @@
 package com.aza.lf;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private String UserPassword;
     private String userPassword;
     private AlertDialog dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +44,17 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.startActivity(MemberIntent);
             }
         });
-        bt_login.setOnClickListener(new View.OnClickListener() {
+        //회원가입버튼클릭시;
+        /*
+        bt_login.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Intent HomeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                LoginActivity.this.startActivity(HomeIntent);
+            public void onClick(View view){
+                Intent NextIntent = new Intent(LoginActivity.this, MineActivity.class);
+                LoginActivity.this.startActivity(NextIntent);
             }
         });
-        //회원가입버튼클릭시;
-        /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        */
+
         //로그인버튼클릭시
         bt_login.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -62,13 +68,29 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if(result.equals("1")){
-                    //로그인 성공시 넘어가는 페이지
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                    dialog = builder.setMessage("로그인성공하였습니다.!").setPositiveButton("확인",null).create();
-                    dialog.show();
-                    return;
+                    //로그인 성공시 이벤트 처리
+                    SharedPreferences SH = getSharedPreferences("Sh", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = SH.edit();
+                    editor.putString("id",et_id.getText().toString());
+                    editor.putString("password",et_pw.getText().toString());
+                    editor.commit();
+
+                    if(new DAO().mylaundry(et_id.getText().toString()).equals(0)){
+                        // 내세탁기가 없을때 생기는 Activity
+                        Intent NextIntent = new Intent(LoginActivity.this, MineActivity.class);
+                        LoginActivity.this.startActivity(NextIntent);
+                        return;
+                    }
+                    else {
+                        // 내세탁기가 있을때 생기는 Activity
+                        Intent NextIntent = new Intent(LoginActivity.this, MineActivity.class);
+                        LoginActivity.this.startActivity(NextIntent);
+                        return;
+                    }
 
                 }
+
+
                 else if(result.equals("2")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     dialog = builder.setMessage("password를 확인해주세요").setPositiveButton("확인",null).create();
@@ -84,37 +106,63 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //로그인버튼클릭시;
-        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
 class loginCheck extends AsyncTask<String, Void, String> {
     String sendMsg, receiveMsg;
 
     @Override
     protected String doInBackground(String[] strings) {
-        try{
-            String str;
-            sendMsg = "id=" + strings[0]+"&pwd="+strings[1];
-            URL url = new URL("http://172.20.1.157:8080/cat/login.jsp?" + sendMsg);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
-            conn.setRequestMethod("GET");
-
-            if(conn.getResponseCode()==conn.HTTP_OK){
-                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(),"EUC-KR");
-                BufferedReader reader = new BufferedReader(tmp);
-                StringBuffer buffer = new StringBuffer();
-                while((str = reader.readLine()) !=null){
-                    buffer.append(str);
-                }
-                receiveMsg=buffer.toString();
-            }else{
-                Log.i("통신결과", conn.getResponseCode()+"에러");
+        try {
+            sendMsg = "id="+strings[0] + "&pwd=" + strings[1];
+            URL url = new URL("http://58.237.71.218:8080/cat/login.jsp");
+            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestProperty("Context-type","application/x-www-form-urlencoded");
+            urlConnection.setRequestMethod("POST");
+            OutputStream opstrm = urlConnection.getOutputStream();
+            opstrm.write(sendMsg.getBytes());
+            opstrm.flush();
+            opstrm.close();
+            String buffer = null;
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            while((buffer = in.readLine()) != null){
+                receiveMsg = buffer;
             }
-        }catch(MalformedURLException e){
-            e.printStackTrace();
-        }catch(IOException e){
+            in.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return receiveMsg;
