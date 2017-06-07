@@ -17,11 +17,9 @@ import com.android.volley.toolbox.Volley;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 
 public class MemberActivity extends AppCompatActivity {
@@ -33,36 +31,6 @@ public class MemberActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private boolean validate = false;
     private String 중복체크="";
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +48,9 @@ public class MemberActivity extends AppCompatActivity {
         bt_mem_no.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                finish();
+                Intent LoginIntent = new Intent(MemberActivity.this,LoginActivity.class);
+                MemberActivity.this.startActivity(LoginIntent);
+                Log.i("a","good");
             }
         });
         //취소버튼클릭;
@@ -92,8 +62,8 @@ public class MemberActivity extends AppCompatActivity {
                 try{
                     idCheck task1 = new idCheck();
                     result = task1.execute(et_id.getText().toString()).get();
-
                 }catch (Exception e){
+                    Log.i("통신결과 에러","a");
                     e.printStackTrace();
                 }
 
@@ -107,20 +77,14 @@ public class MemberActivity extends AppCompatActivity {
                     return;
                 }
                 else if(result.equals("0")){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
-                        dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인",null).create();
-                        dialog.show();
-                        validate = false;
-                        return;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
+                    dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인",null).create();
+                    dialog.show();
+                    validate = false;
+                    return;
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MemberActivity.this);
-                    Log.i("통신결과 에러","a");
-                    Log.i("check123",result);
-                    Log.v("check123",result);
-                    Log.e("check123",result);
-                    Log.d("check123",result);
-                    Log.i("check123",result);
                     dialog = builder.setMessage("이미 사용중인 아이디입니다.").setPositiveButton("확인",null).create();
                     dialog.show();
                     validate = false;
@@ -211,11 +175,10 @@ class memberCheck extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String[] strings) {
-        /*
         try{
             String str;
             sendMsg = "id=" + strings[0]+"&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
-            URL url = new URL("http://172.20.5.188:8080/cat/test.jsp?" + sendMsg);
+            URL url = new URL("http://172.20.1.157:8080/cat/test.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
@@ -227,7 +190,6 @@ class memberCheck extends AsyncTask<String, Void, String> {
                     buffer.append(str);
                 }
                 receiveMsg=buffer.toString();
-
             }else{
                 Log.i("통신결과", conn.getResponseCode()+"에러");
             }
@@ -237,30 +199,8 @@ class memberCheck extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
         return receiveMsg;
-        */
-        try{
-            sendMsg = "id="+strings[0] + "&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
-            URL url = new URL("http://58.237.71.218:8080/cat/test.jsp?");
-            HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-            urlconnection.setDoInput(true);
-            urlconnection.setDoOutput(true);
-            urlconnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-            urlconnection.setRequestMethod("POST");
-            OutputStream opstrm = urlconnection.getOutputStream();
-            opstrm.write(sendMsg.getBytes());
-            opstrm.flush();
-            opstrm.close();
-            String buffer = null;
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
-            while((buffer = in.readLine()) != null){
-                receiveMsg = buffer;
-            }
-            in.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return receiveMsg;
     }
+
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
@@ -275,11 +215,10 @@ class idCheck extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String[] strings) {
-        /*
         try{
             String str;
             sendMsg = "id=" + strings[0];
-            URL url = new URL("http://172.20.4.36:8080/cat/idcheck.jsp?" + sendMsg);
+            URL url = new URL("http://172.20.1.157:8080/cat/idcheck.jsp?" + sendMsg);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-from-urlencoded");
             conn.setRequestMethod("GET");
@@ -299,31 +238,6 @@ class idCheck extends AsyncTask<String, Void, String> {
         }catch(IOException e){
             e.printStackTrace();
         }
-        return receiveMsg;
-        */
-
-        try{
-            sendMsg = "id="+strings[0];
-            URL url = new URL("http://58.237.71.218:8080/cat/idcheck.jsp?");
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setDoInput(true);
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-            urlConnection.setRequestMethod("POST");
-            OutputStream opstrm = urlConnection.getOutputStream();
-            opstrm.write(sendMsg.getBytes());
-            opstrm.flush();
-            opstrm.close();
-            String buffer = null;
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            while((buffer = in.readLine()) != null){
-                receiveMsg = buffer;
-            }
-            in.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
         return receiveMsg;
     }
 

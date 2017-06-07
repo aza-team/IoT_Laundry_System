@@ -4,107 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.aza.lf.MainActivity">
+    tools:context="com.aza.lf.HomeActivity"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/menu_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:id="@+id/menu_bar">
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
             android:id="@+id/bt_alarm"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:drawableStart="@drawable/ic_alarm_50dp"/>
+            android:drawableTop="@drawable/ic_alarm_30dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="5dp"/>
 
-        <EditText
-            android:layout_width="280dp"
+        <TextView
+            android:layout_width="290dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@color/colorAccent"
-            android:text="세탁요정"
-            android:textColor="#ffffff"
+            android:text="LF"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:paddingTop="13dp"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/bt_more"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:layout_weight="1"
-            android:id="@+id/bt_more"
             android:background="@color/colorAccent"
-            android:drawableStart="@drawable/ic_more_50dp"/>
+            android:drawableRight="@drawable/ic_more_30dp"
+            android:paddingRight="15dp"/>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="550dp"
+        android:background="@color/colorWhite"
+        tools:layout_editor_absoluteY="50dp"
+        tools:layout_editor_absoluteX="0dp">
 
-        <LinearLayout
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/notice">
-
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment">
-        </RelativeLayout>
-
-    </FrameLayout>
+            android:id="@+id/lv_laundry"
+            android:layout_margin="15dp"
+            android:dividerHeight="1dp"
+            android:divider="@color/colorGray">
+        </ListView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:layout_marginTop="458dp"
         android:id="@+id/under_bar">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:id="@+id/bt_home"
-            android:text="목록보기"
-            android:textColor="#FFFFFF"
-            android:textSize="10dp"
-            android:textAlignment="center"
-            android:background="@color/colorAccent"
-            android:drawableTop="@drawable/ic_home_30dp"/>
-
-        <Button
-            android:id="@+id/bt_reserve"
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:id="@+id/bt_home"
+            android:text="목록보기"
+            android:textColor="@color/colorWhite"
+            android:textSize="12dp"
+            android:textAlignment="center"
             android:background="@color/colorAccent"
-            android:drawableTop="@drawable/ic_timer_30dp"
-            android:text="예약하기"
-            android:textColor="#FFFFFF"
-            android:textSize="10dp" />
+            android:drawableTop="@drawable/ic_home_30dp"
+            android:paddingTop="5dp"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/bt_reserve"
+            android:text="예약하기"
+            android:textColor="@color/colorWhite"
+            android:textSize="12dp"
+            android:textAlignment="center"
+            android:background="@color/colorAccent"
+            android:drawableTop="@drawable/ic_timer_30dp"
+            android:paddingTop="5dp"/>
+
+        <Button
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:id="@+id/bt_mine"
             android:text="내세탁기"
-            android:textColor="#FFFFFF"
-            android:textSize="10dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="12dp"
+            android:textAlignment="center"
             android:background="@color/colorAccent"
-            android:drawableTop="@drawable/ic_bubble_30dp"/>
+            android:drawableTop="@drawable/ic_bubble_30dp"
+            android:paddingTop="5dp"/>
     </LinearLayout>
 </LinearLayout>
