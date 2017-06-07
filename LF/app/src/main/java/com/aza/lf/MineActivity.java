@@ -45,7 +45,7 @@ public class MineActivity extends AppCompatActivity {
         TextView tv3 = (TextView)findViewById(R.id.tv3);
         final ImageView bt = (ImageView)findViewById(R.id.certification);
         String s1 = "ㆍ 세탁실 내의 와이파이와 연결";
-        SpannableStringBuilder builder = new SpannableS tringBuilder(s1);
+        SpannableStringBuilder builder = new SpannableStringBuilder(s1);
         builder.setSpan(new ForegroundColorSpan(Color.RED),9,13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv1.append(builder);
         String s2 = "ㆍ 사용시, ";
