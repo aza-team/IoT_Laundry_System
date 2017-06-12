@@ -51,7 +51,8 @@ public class MineActivity extends AppCompatActivity {
         String s2 = "ㆍ 사용시, ";
         String s3 = "사용자인증";
         String s4 = " 버튼을 클릭";
-        tv2.setText(Html.fromHtml(s2+"<u>"+s3+"</u>"+s4));
+        tv2.setText(Html.fromHtml(s2+"<u>"+s3+"</u>"+s4));;
+
 
         String s5="ㆍ 예약을 취소할 시,";
         String s6="예약취소";
