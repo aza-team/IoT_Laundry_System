@@ -2,6 +2,7 @@ package com.aza.lf;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.iv_state);
         TextView NumberTextView = (TextView) convertView.findViewById(R.id.tv_laundry_num);
         TextView TimeTextView = (TextView) convertView.findViewById(R.id.tv_laundry_time);
-        ImageButton ReserveImageButton = (ImageButton) convertView.findViewById(R.id.ib_reserve);
+        ImageView ReserveImageButton = (ImageView) convertView.findViewById(R.id.ib_reserve);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ListViewItem listViewItem = listViewItemList.get(position);
@@ -53,7 +55,6 @@ public class ListViewAdapter extends BaseAdapter {
         iconImageView.setImageDrawable(listViewItem.getIcon());
         NumberTextView.setText(listViewItem.getTitle());
         TimeTextView.setText(listViewItem.getDesc());
-        ReserveImageButton.setImageDrawable(listViewItem.getIcon());
 
         return convertView;
     }
@@ -80,4 +81,13 @@ public class ListViewAdapter extends BaseAdapter {
 
         listViewItemList.add(item);
     }
+    //아이템 제거
+    public void deleteItem() {
+        int count;
+        count = getCount();
+        for(int i = 0;i<count;i++){
+            listViewItemList.remove(0);
+        }
+    }
+
 }

@@ -276,4 +276,182 @@ public class DAO {
 
         }
     }
+    // 예약시 사용자 테이블에 mylaundryno update
+    // 동시에 세탁테이블의 userid에 id추가
+    public void setmylaundryno(String id, String laundryno) {
+
+        setmylaundryno set= new setmylaundryno();
+        set.execute(id,laundryno);
+
+        setuserid set1 = new setuserid();
+        set1.execute(id,laundryno);
+    }
+
+
+    class setmylaundryno extends AsyncTask<String, Void, String> {
+
+        String sendMsg, receiveMsg;
+
+
+        @Override
+        protected String doInBackground(String[] strings) {
+
+            try {
+                sendMsg = "id=" + strings[0] + "&mylaundry=" + strings[1];
+                URL url = new URL("http://58.237.71.218:8080/cat/setmylaundry.jsp?");
+                HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+                urlconnection.setDoInput(true);
+                urlconnection.setDoOutput(true);
+                urlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlconnection.setRequestMethod("POST");
+                OutputStream opstrm = urlconnection.getOutputStream();
+                opstrm.write(sendMsg.getBytes());
+                opstrm.flush();
+                opstrm.close();
+                String buffer = null;
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+                while ((buffer = in.readLine()) != null) {
+                    receiveMsg = buffer;
+                }
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }
+    //setuserid
+    class setuserid extends AsyncTask<String, Void, String> {
+
+        String sendMsg, receiveMsg;
+
+
+        @Override
+        protected String doInBackground(String[] strings) {
+
+            try {
+                sendMsg = "id=" + strings[0] + "&no=" + strings[1];
+                URL url = new URL("http://58.237.71.218:8080/cat/setmylaundry.jsp?");
+                HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+                urlconnection.setDoInput(true);
+                urlconnection.setDoOutput(true);
+                urlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlconnection.setRequestMethod("POST");
+                OutputStream opstrm = urlconnection.getOutputStream();
+                opstrm.write(sendMsg.getBytes());
+                opstrm.flush();
+                opstrm.close();
+                String buffer = null;
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+                while ((buffer = in.readLine()) != null) {
+                    receiveMsg = buffer;
+                }
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }
+
+    // 사용중인 세탁기를 예약할때
+    public void setreservation(String id, String laundryno) {
+
+        setmylaundryno set1 =  new setmylaundryno();
+        set1.execute(id, laundryno);
+        reservation reser = new reservation();
+        reser.execute(laundryno,"1");
+        reservationid id1 = new reservationid();
+        id1.execute(laundryno,id);
+    }
+
+    class reservation extends AsyncTask<String, Void, String> {
+
+        String sendMsg, receiveMsg;
+
+
+        @Override
+        protected String doInBackground(String[] strings) {
+
+            try {
+                sendMsg = "id=" + strings[0] + "&flag=" + strings[1];
+                URL url = new URL("http://58.237.71.218:8080/cat/setreservation.jsp?");
+                HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+                urlconnection.setDoInput(true);
+                urlconnection.setDoOutput(true);
+                urlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlconnection.setRequestMethod("POST");
+                OutputStream opstrm = urlconnection.getOutputStream();
+                opstrm.write(sendMsg.getBytes());
+                opstrm.flush();
+                opstrm.close();
+                String buffer = null;
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+                while ((buffer = in.readLine()) != null) {
+                    receiveMsg = buffer;
+                }
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }
+    class reservationid extends AsyncTask<String, Void, String> {
+
+        String sendMsg, receiveMsg;
+
+
+        @Override
+        protected String doInBackground(String[] strings) {
+
+            try {
+                sendMsg = "no=" + strings[0] + "&id=" + strings[1];
+                URL url = new URL("http://58.237.71.218:8080/cat/setreservationid.jsp?");
+                HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+                urlconnection.setDoInput(true);
+                urlconnection.setDoOutput(true);
+                urlconnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                urlconnection.setRequestMethod("POST");
+                OutputStream opstrm = urlconnection.getOutputStream();
+                opstrm.write(sendMsg.getBytes());
+                opstrm.flush();
+                opstrm.close();
+                String buffer = null;
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+                while ((buffer = in.readLine()) != null) {
+                    receiveMsg = buffer;
+                }
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }
+
 }

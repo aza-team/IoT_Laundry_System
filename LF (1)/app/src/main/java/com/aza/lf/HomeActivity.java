@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -37,19 +38,21 @@ import static android.R.attr.button;
 public class HomeActivity extends ActionBarActivity{
     //private DrawerLayout drawer_menu;
     boolean bLog = false; // false : 로그아웃 상태
-
+    ListView listview;
+    ListViewAdapter adapter;
+    SwipeRefreshLayout SRlayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /*
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // ActionBar에 타이틀 변경
         getSupportActionBar().setTitle("LF");
-        */
+
         //ActionBar의 배경색 변경
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF339999));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF17375E));
 
         final Button bt_alarm = (Button) findViewById(R.id.bt_alarm);
         final Button bt_more = (Button) findViewById(R.id.bt_more);
@@ -66,20 +69,6 @@ public class HomeActivity extends ActionBarActivity{
         listview.setAdapter(adapter) ;
 */
         //하단메뉴 클릭 시 화면전환
-        bt_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent HomeIntent = new Intent(HomeActivity.this, HomeActivity.class);
-                HomeActivity.this.startActivity(HomeIntent);
-            }
-        });
-        bt_reserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent ReserveIntent = new Intent(HomeActivity.this, ReserveActivity.class);
-                HomeActivity.this.startActivity(ReserveIntent);
-            }
-        });
         bt_mine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,8 +77,8 @@ public class HomeActivity extends ActionBarActivity{
             }
         });
 
-        ListView listview ;
-        ListViewAdapter adapter;
+
+
 
         // Adapter 생성
         adapter = new ListViewAdapter() ;
@@ -97,30 +86,98 @@ public class HomeActivity extends ActionBarActivity{
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.lv_laundry_menu);
         listview.setAdapter(adapter);
+
+
         /*
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.use_ok),"1번","경과시간 : " + "분");
         */
-        for(int i = 1; i<=10 ; i++){
+        SRlayout = (SwipeRefreshLayout)findViewById(R.id.list);
+        SRlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.deleteItem();
+                //새로고침 코드 입력
+                for(int i =0;i<=4; i++){
+                    int num = i;
+                    String state;
+                    String result = "";
+                    String result2 = "";
+                    DAO dao = new DAO();
+                    result = dao.getstate(""+num);
+                    result2 = dao.getreservation(""+num);
+                    if(result.equals("0")){
+                        adapter.addItem(ContextCompat.getDrawable(getApplicationContext(), R.drawable.use_ok),
+                                (i+1)+"번","경과시간 : 분");
+                    }else if (result.equals("1")){
+                        if(result2.equals("0")) {
+                            adapter.addItem(ContextCompat.getDrawable(getApplicationContext(), R.drawable.rsv_ok_wash),
+                                    (i+1) + "번", "경과시간 : 분");
+                        }else{
+                            adapter.addItem(ContextCompat.getDrawable(getApplicationContext(), R.drawable.rsv_no_wash),
+                                    (i+1)+"번","경과시간 : 분");
+                        }
+                    }else if (result.equals("2")){
+                        if(result2.equals("0")) {
+                            adapter.addItem(ContextCompat.getDrawable(getApplicationContext(), R.drawable.rsv_ok_dewater),
+                                    (i+1) + "번", "경과시간 : 분");
+                        }else{
+                            adapter.addItem(ContextCompat.getDrawable(getApplicationContext(), R.drawable.rsv_no_dewater),
+                                    (i+1)+"번","경과시간 : 분");
+
+                        }
+                    }
+
+                   adapter.notifyDataSetChanged();
+                }
+                //새로고침 완료
+                SRlayout.setRefreshing(false);
+            }
+        });
+        for(int i = 0; i<=4 ; i++){
             int num = i;
+            int count = adapter.getCount();
             String state;
-            Object result = "";
+            String result = "";
+            String result2 = "";
             DAO dao = new DAO();
             result = dao.getstate(""+num);
+            result2 = dao.getreservation(""+num);
+
 
             if(result.equals("0")){
                 adapter.addItem(ContextCompat.getDrawable(this, R.drawable.use_ok),
-                        i+"번","경과시간 : 분");
+                        (count+1)+"번","경과시간 : 분");
             }else if (result.equals("1")){
-                adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_no_wash),
-                        i+"번","경과시간 : 분");
+                if(result2.equals("0")) {
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_ok_wash),
+                            (count + 1) + "번", "경과시간 : 분");
+                }
+                else{
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_no_wash),
+                            (count+1)+"번","경과시간 : 분");
+                }
             }else if (result.equals("2")){
-                adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_ok_dewater),
-                        i+"번","경과시간 : 분");
+                if(result2.equals("0")) {
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_ok_dewater),
+                            (count + 1) + "번", "경과시간 : 분");
+                }
+                else{
+                    adapter.addItem(ContextCompat.getDrawable(this, R.drawable.rsv_no_dewater),
+                            (count+1)+"번","경과시간 : 분");
+                }
             }
-
-
-
         }
+
+
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(HomeActivity.this,ReserveActivity.class);
+                intent.putExtra("laundryno",position);
+                HomeActivity.this.startActivity(intent);
+            }
+        });
 /*
         // 첫 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.use_ok),
@@ -133,21 +190,10 @@ public class HomeActivity extends ActionBarActivity{
                 "3번", "경과시간 : "+"분") ;
 */
 
-        // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                ListViewItem item = (ListViewItem) parent.getItemAtPosition(position) ;
 
-                String titleStr = item.getTitle() ;
-                String descStr = item.getDesc() ;
-                Drawable iconDrawable = item.getIcon() ;
 
-                // TODO : use item data.
-            }
-        }) ;
     }
+
 
 
     @Override

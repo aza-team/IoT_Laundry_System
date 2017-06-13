@@ -5,46 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/menu_bar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bt_alarm"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/colorAccent"
-                android:drawableStart="@drawable/ic_alarm_30dp" />
-
-            <TextView
-                android:layout_width="280dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@color/colorAccent"
-                android:text="내세탁기"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/bt_more"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@color/colorAccent"
-                android:drawableStart="@drawable/ic_more_30dp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,4 +136,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+

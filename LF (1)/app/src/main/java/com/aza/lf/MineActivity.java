@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
@@ -40,6 +41,12 @@ public class MineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // ActionBar에 타이틀 변경
+        getSupportActionBar().setTitle("내세탁기");
+        //ActionBar의 배경색 변경
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF17375E));
+
         setContentView(R.layout.activity_mine);
         TextView tv1 = (TextView) findViewById(R.id.tv1);
         TextView tv2 = (TextView) findViewById(R.id.tv2);
@@ -48,6 +55,18 @@ public class MineActivity extends AppCompatActivity {
         String s1 = "ㆍ 세탁실 내의 와이파이와 연결";
         SpannableStringBuilder builder = new SpannableStringBuilder(s1);
         builder.setSpan(new ForegroundColorSpan(Color.RED), 9, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        Button bt_home = (Button)findViewById(R.id.bt_home);
+        Button bt_reserve = (Button)findViewById(R.id.bt_reserve);
+        Button bt_mine = (Button)findViewById(R.id.bt_mine);
+        //하단메뉴 클릭 시 화면전환
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent HomeIntent = new Intent(MineActivity.this, HomeActivity.class);
+                MineActivity.this.startActivity(HomeIntent);
+            }
+        });
+
         tv1.append(builder);
         String s2 = "ㆍ 사용시, ";
         String s3 = "사용자인증";
@@ -98,6 +117,7 @@ public class MineActivity extends AppCompatActivity {
                     String yjp_guest3 = "d8:38:fc:22:90:ac";
                     String myHome = "64:e5:99:37:86:c2";
                     String bean = "00:26:66:86:24:b8";
+                    String hollys = "88:36:6c:21:17:d2";
 
                     int m_iNetworkType = activeNetwork.getType();
                     //BSSID로 구분
@@ -108,7 +128,7 @@ public class MineActivity extends AppCompatActivity {
 
                         if (Currentmac.trim().equals(yjp_guest) || Currentmac.trim().equals(yjp_guset2)
                                 || Currentmac.trim().equals(yjp_guest3) || Currentmac.trim().equals(myHome)
-                                || Currentmac.trim().equals(bean)) {
+                                || Currentmac.trim().equals(bean) || Currentmac.trim().equals(hollys)) {
 
                             //네트워크 인증되었을때 발생하는 이벤트
 
@@ -185,5 +205,7 @@ public class MineActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

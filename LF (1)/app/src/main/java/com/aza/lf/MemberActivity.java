@@ -174,7 +174,7 @@ class memberCheck extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] strings) {
         try{
-            sendMsg = "id="+strings[0] + "&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3];
+            sendMsg = "mylaundry="+0+"&id="+strings[0] + "&pwd="+strings[1]+"&phone="+strings[2]+"&email="+strings[3]+"&certification=0";
             URL url = new URL("http://58.237.71.218:8080/cat/test.jsp?");
             HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
             urlconnection.setDoInput(true);

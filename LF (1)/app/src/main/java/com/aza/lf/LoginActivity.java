@@ -73,10 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("password",et_pw.getText().toString());
                     editor.commit();
 
-                        // 내세탁기가 없을때 생기는 Activity
-                        Intent HomeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                        LoginActivity.this.startActivity(HomeIntent);
-                        return;
+                    Intent HomeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    LoginActivity.this.startActivity(HomeIntent);
+                    return;
 
                 }
 
