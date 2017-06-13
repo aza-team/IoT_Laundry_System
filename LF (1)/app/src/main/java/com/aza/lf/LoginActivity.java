@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("password",et_pw.getText().toString());
                     editor.commit();
 
-                    Intent HomeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent HomeIntent = new Intent(LoginActivity.this, Lodinging.class);
                     LoginActivity.this.startActivity(HomeIntent);
                     return;
 

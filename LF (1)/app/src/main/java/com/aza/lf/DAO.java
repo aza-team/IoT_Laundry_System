@@ -337,7 +337,7 @@ public class DAO {
 
             try {
                 sendMsg = "id=" + strings[0] + "&no=" + strings[1];
-                URL url = new URL("http://58.237.71.218:8080/cat/setmylaundry.jsp?");
+                URL url = new URL("http://58.237.71.218:8080/cat/setuserid.jsp?");
                 HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
                 urlconnection.setDoInput(true);
                 urlconnection.setDoOutput(true);

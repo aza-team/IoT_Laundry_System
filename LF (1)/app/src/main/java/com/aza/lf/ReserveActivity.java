@@ -72,16 +72,26 @@ public class ReserveActivity extends AppCompatActivity {
         String state = "";
         SharedPreferences SH = getSharedPreferences("Sh",MODE_PRIVATE);
         final String id = SH.getString("id","");
-        Log.i("id!!!!!!",id+"");
+        final String flag;
+        flag = dao.mylaundry(id);
+
              if(result.equals("0")){
                 iv.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.use_ok));
                 state = "대기중";
                  IB.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View v) {
-                        dao.setmylaundryno(id,laundryno+"");
-                         Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 인증을 거친 후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
-                         finish();
+                         if(flag.equals(laundryno+"")){
+                             Toast.makeText(ReserveActivity.this, "이미 예약한 세탁기입니다.", Toast.LENGTH_SHORT).show();
+                         }
+                         else if(flag.equals("-1")){
+                             dao.setmylaundryno(id,laundryno+"");
+                             Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 인증을 거친 후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+                             finish();
+                         }else{
+                             Toast.makeText(ReserveActivity.this, "최대 한대의 세탁기만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                         }
+
                      }
                  });
             }else if (result.equals("1")){
@@ -91,9 +101,17 @@ public class ReserveActivity extends AppCompatActivity {
                      IB.setOnClickListener(new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
-                             dao.setmylaundryno(id,laundryno+"");
-                             dao.setreservation(id,laundryno+"");
-                             Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 현 사용자의 세탁종료후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+                             if(flag.equals(laundryno)){
+                                 Toast.makeText(ReserveActivity.this, "이미 예약한 세탁기입니다.", Toast.LENGTH_SHORT).show();
+                             }
+                             else if(flag.equals("-1")) {
+                                 dao.setmylaundryno(id, laundryno + "");
+                                 dao.setreservation(id, laundryno + "");
+                                 Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 현 사용자의 세탁종료후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+                                 finish();
+                             }else{
+                                 Toast.makeText(ReserveActivity.this, "최대 한대의 세탁기만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                             }
 
                          }
                      });
@@ -111,10 +129,17 @@ public class ReserveActivity extends AppCompatActivity {
                      IB.setOnClickListener(new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
-                             dao.setmylaundryno(id,laundryno+"");
-                             dao.setreservation(id,laundryno+"");
-                             Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 현 사용자의 세탁종료후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
-
+                             if(flag.equals(laundryno)){
+                                 Toast.makeText(ReserveActivity.this, "이미 예약한 세탁기입니다.", Toast.LENGTH_SHORT).show();
+                             }
+                             else if(flag.equals("-1")) {
+                                 dao.setmylaundryno(id, laundryno + "");
+                                 dao.setreservation(id, laundryno + "");
+                                 Toast.makeText(ReserveActivity.this, "내세탁기에 추가되었습니다. 현 사용자의 세탁종료후 사용하시기 바랍니다.", Toast.LENGTH_SHORT).show();
+                                 finish();
+                             }else{
+                                 Toast.makeText(ReserveActivity.this, "최대 한대의 세탁기만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                             }
                          }
                      });
                  }else{
